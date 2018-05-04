@@ -15,8 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from HomosapProteins.views import ProteinViewSet
+
+router = routers.DefaultRouter()
+router.register('proteins', ProteinViewSet)
 
 urlpatterns = [
     path('HomosapProteins/', include('HomosapProteins.urls')),
     path('admin/', admin.site.urls),
+    path('api/', include((router.urls, 'HomosapProteins'),  namespace='rest_framework')),
 ]
