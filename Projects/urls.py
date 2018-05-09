@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from rest_framework.urlpatterns import format_suffix_patterns
 from HomosapProteins.views import ProteinViewSet
+from HomosapProteins import views
 
 router = routers.DefaultRouter()
 router.register('proteins', ProteinViewSet)
@@ -25,4 +27,7 @@ urlpatterns = [
     path('HomosapProteins/', include('HomosapProteins.urls')),
     path('admin/', admin.site.urls),
     path('api/', include((router.urls, 'HomosapProteins'),  namespace='rest_framework')),
+    path('api/protein/', views.ProteinList.as_view()),
 ]
+
+# urlpatterns = format_suffix_patterns(urlpatterns)
