@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from HomosapProteins.models import Protein
 from .serializers import ProteinSerializer
+from django.views.generic import TemplateView
 import logging
 logger = logging.getLogger(__name__)
 # ------------------------BrowserView Section---------------------------#
@@ -18,6 +19,10 @@ def index(request):
     # myerrorlog(a)
     return HttpResponse("Hello, world. You're at the Protein index.")
 
+
+class HomePageView(TemplateView):
+    def get(self, request, **kwargs):
+        return render(request, 'HomosapProteins/base.html', context=None)
 # ------------------------API Section---------------------------#
 
 
